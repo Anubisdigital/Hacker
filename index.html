@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Type Detector</title>
+    <style>
+        /* CSS: Styling for a clean, centered look */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f7f9;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        .result-box {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #e9ecef;
+            margin-top: 20px;
+            text-align: left;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        p strong {
+            color: #007bff; /* Blue for key information */
+        }
+        .os-android {
+            color: #38a169; /* Green */
+        }
+        .os-ios {
+            color: #5d5d5d; /* Dark gray */
+        }
+        .os-other {
+            color: #f6ad55; /* Orange */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Device & OS Detection 🔎</h1>
+        <p>Click the button to analyze your device's information.</p>
+        <button id="detect-button" onclick="detectDevice()">Detect Device Info</button>
+        <div id="result" class="result-box" style="display: none;">
+            </div>
+    </div>
+
+    <script>
+        // JavaScript: Device detection logic
+        function detectDevice() {
+            const userAgent = navigator.userAgent;
+            const resultDiv = document.getElementById('result');
+            let os = 'Unknown OS';
+            let modelHint = 'N/A';
+            let osClass = 'os-other';
+            
+            // --- OS Detection Logic ---
+            if (/Android/i.test(userAgent)) {
+                os = 'Android';
+                osClass = 'os-android';
+                
+                // Attempt to find device model/manufacturer (common pattern in Android UAs)
+                const match = userAgent.match(/Android[^;]+; ([^)]+)/);
+                if (match && match[1]) {
+                    // This often captures the device model, e.g., 'SM-G998B' or 'TECNO-KF6k'
+                    modelHint = match[1].trim();
+                }
+                
+            } else if (/(iPhone|iPad|iPod)/i.test(userAgent)) {
+                os = 'iOS';
+                osClass = 'os-ios';
+                // iOS User Agents are generally very standardized and don't include a model/manufacturer hint
+                // unless it's an old UA. Modern iOS devices often show "Macintosh" and rely on other checks.
+                modelHint = 'iPhone/iPad/iPod';
+
+                // Check for modern iPadOS which can mask as Mac
+                if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) {
+                    os = 'iPadOS (iOS)';
+                }
+
+            } else if (/Windows Phone/i.test(userAgent)) {
+                os = 'Windows Phone';
+            } else if (/Macintosh|Mac OS X/i.test(userAgent) && !/(iPhone|iPad|iPod)/i.test(userAgent)) {
+                os = 'Desktop (Mac)';
+            } else if (/Windows/i.test(userAgent)) {
+                os = 'Desktop (Windows)';
+            } else if (/Linux/i.test(userAgent)) {
+                os = 'Desktop (Linux)';
+            }
+            
+            // --- Display Results ---
+            resultDiv.innerHTML = `
+                <p><strong>Operating System:</strong> <span class="${osClass}">${os}</span></p>
+                <p><strong>Model/Manufacturer Hint:</strong> <span>${modelHint}</span></p>
+                <p><strong>Full User Agent String (for technical detail):</strong> <span>${userAgent}</span></p>
+            `;
+            resultDiv.style.display = 'block';
+            document.getElementById('detect-button').style.display = 'none'; // Hide button after detection
+        }
+    </script>
+</body>
+</html>
