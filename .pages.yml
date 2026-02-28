@@ -1,9 +1,7 @@
-# 1. Setup the Media/Upload folder
 media:
   input: images
   output: images
 
-# 2. Setup the "No-Code" Sidebar
 content:
   - name: "Website Editor"
     type: object
@@ -27,6 +25,5 @@ content:
         label: "Other Page Heading"
         type: string
       - name: other_image
-        label: "Food"
+        label: "Other Page Image"
         type: image
-
