@@ -1,0 +1,16 @@
+content:
+  - name: "Website Editor"
+    type: object
+    path: content.json
+    preview: 
+      url: https://anubisdigital.github.io/Hacker/
+    fields:
+      - name: brand_color
+        label: "Brand Color"
+        type: string
+      - name: index_title
+        label: "Home Heading"
+        type: string
+      - name: index_image
+        label: "Home Image"
+        type: image
