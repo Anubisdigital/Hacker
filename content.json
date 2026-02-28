@@ -2,7 +2,9 @@
   "brand_color": "#000000",
   "bg_color": "#ffffff",
   "index_title": "Welcome to Anubis Digital",
+  "index_btn_text": "Click Here",
   "index_image": "images/try.jpg",
   "other_title": "The Second Page",
+  "other_btn_text": "Go Back",
   "other_image": "images/try1.jpg"
 }
