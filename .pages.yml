@@ -29,3 +29,4 @@ content:
       - name: other_image
         label: "Other Page Image"
         type: image
+
