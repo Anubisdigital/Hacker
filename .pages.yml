@@ -27,6 +27,6 @@ content:
         label: "Other Page Heading"
         type: string
       - name: other_image
-        label: "Other Page Image"
+        label: "Food"
         type: image
 
