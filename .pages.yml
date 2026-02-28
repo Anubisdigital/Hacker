@@ -1,6 +1,6 @@
 # 1. Setup the Media/Upload folder
 media:
-  input: images # This matches the folder you created
+  input: images
   output: images
 
 # 2. Setup the "No-Code" Sidebar
@@ -8,38 +8,23 @@ content:
   - name: "Website Editor"
     type: object
     path: content.json
-    # Replace the URL below with your actual live link
     preview: 
       url: https://anubisdigital.github.io/Hacker/
     fields:
       - name: brand_color
-        label: "Brand Color (Buttons/Text)"
+        label: "Brand Color"
         type: string
       - name: bg_color
         label: "Background Color"
         type: string
-        
-      # Fields for the Home Page
-      - label: "--- Home Page Content ---"
-        type: info
       - name: index_title
         label: "Home Page Heading"
-        type: string
-      - name: index_btn_text
-        label: "Home Page Button Label"
         type: string
       - name: index_image
         label: "Home Page Image"
         type: image
-
-      # Fields for the Other Page
-      - label: "--- Other Page Content ---"
-        type: info
       - name: other_title
         label: "Other Page Heading"
-        type: string
-      - name: other_btn_text
-        label: "Other Page Button Label"
         type: string
       - name: other_image
         label: "Other Page Image"
